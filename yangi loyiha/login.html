@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>EduWay — Kirish</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <style>
+
+        /* ========================================
+           LOGIN PAGE
+        ======================================== */
+
+        .auth-page {
+
+            min-height: calc(100vh - 78px);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            padding: 60px 0;
+
+            background:
+
+                radial-gradient(
+                    circle at 10% 20%,
+                    rgba(37, 99, 235, 0.12),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 90% 80%,
+                    rgba(124, 58, 237, 0.10),
+                    transparent 30%
+                ),
+
+                #f8fafc;
+
+        }
+
+
+        .auth-container {
+
+            width: min(1050px, 92%);
+
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            background: white;
+
+            border-radius: 25px;
+
+            overflow: hidden;
+
+            border: 1px solid var(--border);
+
+            box-shadow:
+                0 25px 70px
+                rgba(15, 23, 42, 0.10);
+
+        }
+
+
+        /* LEFT */
+
+        .auth-info {
+
+            padding: 55px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            color: white;
+
+            background:
+
+                radial-gradient(
+                    circle at 10% 10%,
+                    #60a5fa,
+                    transparent 35%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #1d4ed8,
+                    #7c3aed
+                );
+
+        }
+
+
+        .auth-info .logo {
+
+            color: white;
+
+            margin-bottom: 35px;
+
+        }
+
+
+        .auth-info .logo span {
+
+            color: #bfdbfe;
+
+        }
+
+
+        .auth-info h1 {
+
+            max-width: 400px;
+
+            font-size: 42px;
+
+            line-height: 1.12;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .auth-info > p {
+
+            max-width: 430px;
+
+            color: #dbeafe;
+
+            font-size: 16px;
+
+            margin-bottom: 35px;
+
+        }
+
+
+        .auth-benefits {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 16px;
+
+        }
+
+
+        .auth-benefit {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+        }
+
+
+        .auth-benefit-icon {
+
+            width: 38px;
+
+            height: 38px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: rgba(255,255,255,0.14);
+
+            border: 1px solid rgba(255,255,255,0.18);
+
+            border-radius: 10px;
+
+        }
+
+
+        .auth-benefit span {
+
+            font-size: 14px;
+
+            color: #eff6ff;
+
+        }
+
+
+        /* RIGHT */
+
+        .auth-form-area {
+
+            padding: 55px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+        }
+
+
+        .auth-heading {
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .auth-heading h2 {
+
+            font-size: 30px;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .auth-heading p {
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+        }
+
+
+        .auth-heading a {
+
+            color: var(--primary);
+
+            font-weight: 700;
+
+        }
+
+
+        .form-group {
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+        }
+
+
+        .input-wrapper {
+
+            position: relative;
+
+        }
+
+
+        .input-icon {
+
+            position: absolute;
+
+            left: 14px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            font-size: 16px;
+
+        }
+
+
+        .form-group input {
+
+            width: 100%;
+
+            padding: 14px 45px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 9px;
+
+            outline: none;
+
+            color: var(--dark);
+
+            font-size: 14px;
+
+            transition: 0.3s;
+
+        }
+
+
+        .form-group input:focus {
+
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(37, 99, 235, 0.08);
+
+        }
+
+
+        .password-toggle {
+
+            position: absolute;
+
+            right: 13px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            color: var(--muted);
+
+            font-size: 16px;
+
+        }
+
+
+        .password-toggle:hover {
+
+            color: var(--primary);
+
+        }
+
+
+        .login-options {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin: 5px 0 22px;
+
+        }
+
+
+        .remember {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+        }
+
+
+        .remember input {
+
+            accent-color: var(--primary);
+
+        }
+
+
+        .forgot {
+
+            color: var(--primary);
+
+            font-size: 12px;
+
+            font-weight: 700;
+
+        }
+
+
+        .login-submit {
+
+            width: 100%;
+
+            border: none;
+
+            cursor: pointer;
+
+            padding: 14px;
+
+            border-radius: 10px;
+
+            background: var(--primary);
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            transition: 0.3s;
+
+        }
+
+
+        .login-submit:hover {
+
+            background: var(--primary-dark);
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 25px
+                rgba(37, 99, 235, 0.25);
+
+        }
+
+
+        .form-message {
+
+            display: none;
+
+            margin-bottom: 18px;
+
+            padding: 11px 13px;
+
+            border-radius: 8px;
+
+            background: #fee2e2;
+
+            color: #dc2626;
+
+            font-size: 13px;
+
+        }
+
+
+        .form-message.success {
+
+            background: #dcfce7;
+
+            color: #15803d;
+
+        }
+
+
+        .register-link {
+
+            margin-top: 25px;
+
+            padding-top: 22px;
+
+            border-top: 1px solid var(--border);
+
+            text-align: center;
+
+            color: var(--muted);
+
+            font-size: 13px;
+
+        }
+
+
+        .register-link a {
+
+            color: var(--primary);
+
+            font-weight: 700;
+
+        }
+
+
+        @media (max-width: 800px) {
+
+            .auth-container {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .auth-info {
+
+                padding: 40px;
+
+            }
+
+
+            .auth-info h1 {
+
+                font-size: 34px;
+
+            }
+
+
+            .auth-form-area {
+
+                padding: 40px;
+
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            .auth-page {
+
+                padding: 30px 0;
+
+            }
+
+
+            .auth-info {
+
+                padding: 30px;
+
+            }
+
+
+            .auth-info h1 {
+
+                font-size: 30px;
+
+            }
+
+
+            .auth-form-area {
+
+                padding: 30px 22px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="container nav-content">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+                Edu<span>Way</span>
+            </a>
+
+
+            <nav>
+
+                <a href="index.html">
+                    Bosh sahifa
+                </a>
+
+                <a href="courses.html">
+                    Kurslar
+                </a>
+
+                <a href="index.html#about">
+                    Biz haqimizda
+                </a>
+
+                <a href="index.html#contact">
+                    Aloqa
+                </a>
+
+            </nav>
+
+
+            <div class="nav-buttons">
+
+                <a
+                    href="register.html"
+                    class="register-btn"
+                >
+                    Ro‘yxatdan o‘tish
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- LOGIN -->
+
+    <main class="auth-page">
+
+        <div class="auth-container">
+
+
+            <!-- LEFT -->
+
+            <div class="auth-info">
+
+                <a
+                    href="index.html"
+                    class="logo"
+                >
+                    Edu<span>Way</span>
+                </a>
+
+
+                <h1>
+                    Bilimingizni
+                    davom ettiring.
+                </h1>
+
+
+                <p>
+                    EduWay hisobingizga kiring va
+                    o‘zingiz boshlagan kurslarni
+                    davom ettiring.
+                </p>
+
+
+                <div class="auth-benefits">
+
+
+                    <div class="auth-benefit">
+
+                        <div class="auth-benefit-icon">
+                            📚
+                        </div>
+
+                        <span>
+                            Kurslaringizni bir joyda boshqaring
+                        </span>
+
+                    </div>
+
+
+                    <div class="auth-benefit">
+
+                        <div class="auth-benefit-icon">
+                            📈
+                        </div>
+
+                        <span>
+                            O‘z progress'ingizni kuzating
+                        </span>
+
+                    </div>
+
+
+                    <div class="auth-benefit">
+
+                        <div class="auth-benefit-icon">
+                            🏆
+                        </div>
+
+                        <span>
+                            Yutuq va sertifikatlaringizni saqlang
+                        </span>
+
+                    </div>
+
+
+                    <div class="auth-benefit">
+
+                        <div class="auth-benefit-icon">
+                            💼
+                        </div>
+
+                        <span>
+                            Portfolioingizni rivojlantiring
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- RIGHT -->
+
+            <div class="auth-form-area">
+
+
+                <div class="auth-heading">
+
+                    <h2>
+                        Xush kelibsiz!
+                    </h2>
+
+                    <p>
+                        Hisobingiz yo‘qmi?
+                        <a href="register.html">
+                            Ro‘yxatdan o‘tish
+                        </a>
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="formMessage"
+                    class="form-message"
+                ></div>
+
+
+                <form
+                    id="loginForm"
+                    novalidate
+                >
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                ✉️
+                            </span>
+
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="siz@example.com"
+                                autocomplete="email"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Parol
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <span class="input-icon">
+                                🔒
+                            </span>
+
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="Parolingizni kiriting"
+                                autocomplete="current-password"
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePassword()"
+                            >
+                                👁
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- OPTIONS -->
+
+                    <div class="login-options">
+
+                        <label class="remember">
+
+                            <input
+                                type="checkbox"
+                                id="remember"
+                            >
+
+                            Meni eslab qolish
+
+                        </label>
+
+
+                        <a
+                            href="#"
+                            class="forgot"
+                            onclick="forgotPassword(event)"
+                        >
+                            Parolni unutdingizmi?
+                        </a>
+
+                    </div>
+
+
+                    <!-- SUBMIT -->
+
+                    <button
+                        type="submit"
+                        class="login-submit"
+                    >
+                        Kirish →
+                    </button>
+
+
+                </form>
+
+
+                <div class="register-link">
+
+                    Hali hisobingiz yo‘qmi?
+
+                    <a href="register.html">
+                        Bepul ro‘yxatdan o‘ting
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        const loginForm =
+            document.getElementById(
+                "loginForm"
+            );
+
+        const formMessage =
+            document.getElementById(
+                "formMessage"
+            );
+
+
+        function showMessage(
+            text,
+            success = false
+        ) {
+
+            formMessage.textContent =
+                text;
+
+            formMessage.style.display =
+                "block";
+
+            formMessage.classList.toggle(
+                "success",
+                success
+            );
+
+        }
+
+
+        function togglePassword() {
+
+            const password =
+                document.getElementById(
+                    "password"
+                );
+
+            const button =
+                document.querySelector(
+                    ".password-toggle"
+                );
+
+
+            if (
+                password.type ===
+                "password"
+            ) {
+
+                password.type = "text";
+
+                button.textContent = "🙈";
+
+            } else {
+
+                password.type = "password";
+
+                button.textContent = "👁";
+
+            }
+
+        }
+
+
+        function forgotPassword(event) {
+
+            event.preventDefault();
+
+            showMessage(
+                "Parolni tiklash funksiyasi keyingi bosqichda qo‘shiladi."
+            );
+
+        }
+
+
+        loginForm.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                const email =
+                    document.getElementById(
+                        "email"
+                    ).value.trim();
+
+
+                const password =
+                    document.getElementById(
+                        "password"
+                    ).value;
+
+
+                if (!email) {
+
+                    showMessage(
+                        "Iltimos, emailingizni kiriting."
+                    );
+
+                    return;
+
+                }
+
+
+                if (!password) {
+
+                    showMessage(
+                        "Iltimos, parolingizni kiriting."
+                    );
+
+                    return;
+
+                }
+
+
+                const savedUser =
+                    localStorage.getItem(
+                        "eduwayUser"
+                    );
+
+
+                if (!savedUser) {
+
+                    showMessage(
+                        "Siz hali ro‘yxatdan o‘tmagansiz. Avval hisob yarating."
+                    );
+
+                    return;
+
+                }
+
+
+                const user =
+                    JSON.parse(
+                        savedUser
+                    );
+
+
+                if (
+                    email !== user.email ||
+                    password !== user.password
+                ) {
+
+                    showMessage(
+                        "Email yoki parol noto‘g‘ri."
+                    );
+
+                    return;
+
+                }
+
+
+                localStorage.setItem(
+                    "eduwayLoggedIn",
+                    "true"
+                );
+
+
+                showMessage(
+                    "Muvaffaqiyatli kirdingiz! Kabinetga o‘tilmoqda...",
+                    true
+                );
+
+
+                setTimeout(
+                    function() {
+
+                        window.location.href =
+                            "dashboard.html";
+
+                    },
+                    1000
+                );
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
