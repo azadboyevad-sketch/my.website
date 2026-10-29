@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Diana Ozodboyeva | Frontend Developer</title>
+
+    <style>
+        /* =========================
+           ASOSIY SOZLAMALAR
+        ========================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8faff;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================== */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            padding: 18px 8%;
+
+            background: rgba(37, 99, 235, 0.95);
+            backdrop-filter: blur(10px);
+
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #bfdbfe;
+        }
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            min-height: 92vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            padding: 80px 20px;
+
+            background:
+                radial-gradient(circle at top left, #dbeafe, transparent 35%),
+                radial-gradient(circle at bottom right, #e9d5ff, transparent 35%),
+                #f8faff;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: fadeUp 1s ease;
+        }
+
+        .profile-circle {
+            width: 150px;
+            height: 150px;
+
+            margin: 0 auto 25px;
+
+            border-radius: 50%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 65px;
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #7c3aed
+            );
+
+            color: white;
+
+            box-shadow:
+                0 15px 40px rgba(37, 99, 235, 0.3);
+
+            transition: 0.4s;
+        }
+
+        .profile-circle:hover {
+            transform: scale(1.08) rotate(5deg);
+        }
+
+        .hero h1 {
+            font-size: 60px;
+            color: #1d4ed8;
+            margin-bottom: 10px;
+        }
+
+        .hero h2 {
+            font-size: 28px;
+            color: #7c3aed;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: auto;
+
+            color: #64748b;
+            font-size: 20px;
+        }
+
+        /* =========================
+           TUGMA
+        ========================== */
+
+        .btn {
+            display: inline-block;
+
+            margin-top: 30px;
+
+            padding: 14px 30px;
+
+            background: #2563eb;
+            color: white;
+
+            border: none;
+            border-radius: 10px;
+
+            font-size: 17px;
+
+            cursor: pointer;
+            text-decoration: none;
+
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 12px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        /* =========================
+           UMUMIY SECTION
+        ========================== */
+
+        section {
+            padding: 90px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+
+            font-size: 40px;
+
+            color: #1d4ed8;
+
+            margin-bottom: 50px;
+        }
+
+        .section-title span {
+            color: #7c3aed;
+        }
+
+        /* =========================
+           MEN HAQIMDA
+        ========================== */
+
+        .about {
+            background: white;
+        }
+
+        .about-container {
+            max-width: 1000px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            gap: 40px;
+
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 30px;
+            color: #2563eb;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            color: #64748b;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .info-box {
+            padding: 30px;
+
+            border-radius: 20px;
+
+            background: linear-gradient(
+                135deg,
+                #eff6ff,
+                #f5f3ff
+            );
+
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+        }
+
+        .info-item {
+            padding: 15px 0;
+
+            border-bottom: 1px solid #dbeafe;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-item strong {
+            color: #2563eb;
+        }
+
+        /* =========================
+           TA'LIM
+        ========================== */
+
+        .education {
+            background: #eef4ff;
+        }
+
+        .timeline {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .timeline-item {
+            position: relative;
+
+            background: white;
+
+            padding: 30px;
+
+            margin-bottom: 25px;
+
+            border-left: 5px solid #2563eb;
+
+            border-radius: 0 15px 15px 0;
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.07);
+
+            transition: 0.3s;
+        }
+
+        .timeline-item:hover {
+            transform: translateX(8px);
+        }
+
+        .timeline-item h3 {
+            color: #2563eb;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .timeline-item .date {
+            color: #7c3aed;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .timeline-item p {
+            color: #64748b;
+        }
+
+        /* =========================
+           KO'NIKMALAR
+        ========================== */
+
+        .skills {
+            background: white;
+        }
+
+        .skills-container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .skill {
+            margin-bottom: 25px;
+        }
+
+        .skill-title {
+            display: flex;
+            justify-content: space-between;
+
+            margin-bottom: 8px;
+
+            font-weight: bold;
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 12px;
+
+            background: #e2e8f0;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+
+            background: linear-gradient(
+                90deg,
+                #2563eb,
+                #7c3aed
+            );
+
+            border-radius: 20px;
+
+            animation: progress 1.5s ease;
+        }
+
+        .html {
+            width: 85%;
+        }
+
+        .css {
+            width: 80%;
+        }
+
+        .smm {
+            width: 75%;
+        }
+
+        .video {
+            width: 75%;
+        }
+
+        .office {
+            width: 85%;
+        }
+
+        /* =========================
+           TAJRIBA
+        ========================== */
+
+        .experience {
+            background: #eef4ff;
+        }
+
+        .experience-card {
+            max-width: 850px;
+            margin: auto;
+
+            padding: 40px;
+
+            background: white;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.08);
+
+            transition: 0.3s;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .experience-card h3 {
+            color: #2563eb;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .experience-card .time {
+            color: #7c3aed;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .experience-card p {
+            color: #64748b;
+            font-size: 18px;
+        }
+
+        /* =========================
+           MAQSAD
+        ========================== */
+
+        .goal {
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1d4ed8,
+                    #7c3aed
+                );
+
+            color: white;
+        }
+
+        .goal h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .goal p {
+            max-width: 750px;
+
+            margin: auto;
+
+            font-size: 20px;
+
+            color: #e0e7ff;
+        }
+
+        /* =========================
+           CONTACT
+        ========================== */
+
+        .contact {
+            background: white;
+        }
+
+        .contact-container {
+            max-width: 650px;
+            margin: auto;
+        }
+
+        .contact-form {
+            padding: 35px;
+
+            background: #f8faff;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 10px 30px rgba(0, 0, 0, 0.07);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+
+            padding: 15px;
+
+            margin-bottom: 15px;
+
+            border: 2px solid #e2e8f0;
+
+            border-radius: 10px;
+
+            font-size: 16px;
+
+            outline: none;
+
+            transition: 0.3s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #2563eb;
+        }
+
+        .contact-form textarea {
+            height: 140px;
+            resize: none;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            padding: 35px;
+
+            text-align: center;
+
+            background: #172554;
+
+            color: white;
+        }
+
+        footer p {
+            margin: 5px;
+            color: #bfdbfe;
+        }
+
+        /* =========================
+           ANIMATSIYALAR
+        ========================== */
+
+        @keyframes fadeUp {
+
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        @keyframes progress {
+
+            from {
+                width: 0;
+            }
+
+        }
+
+        /* =========================
+           TELEFON UCHUN
+        ========================== */
+
+        @media (max-width: 768px) {
+
+            nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero h2 {
+                font-size: 22px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .goal h2 {
+                font-size: 32px;
+            }
+
+        }
+
+        @media (max-width: 480px) {
+
+            .hero h1 {
+                font-size: 34px;
+            }
+
+            .profile-circle {
+                width: 120px;
+                height: 120px;
+                font-size: 50px;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            .nav-links a {
+                font-size: 14px;
+            }
+
+            .experience-card {
+                padding: 25px;
+            }
+
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav>
+
+        <div class="logo">
+            Diana.dev 💻
+        </div>
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="#home">Bosh sahifa</a>
+            </li>
+
+            <li>
+                <a href="#about">Men haqimda</a>
+            </li>
+
+            <li>
+                <a href="#education">Ta'lim</a>
+            </li>
+
+            <li>
+                <a href="#skills">Ko‘nikmalar</a>
+            </li>
+
+            <li>
+                <a href="#experience">Tajriba</a>
+            </li>
+
+            <li>
+                <a href="#contact">Aloqa</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <!-- =========================
+         BOSH SAHIFA
+    ========================== -->
+
+    <section class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="profile-circle">
+                👩‍💻
+            </div>
+
+            <h1>
+                Diana Ozodboyeva
+            </h1>
+
+            <h2>
+                Bo‘lajak Frontend Developer 🚀
+            </h2>
+
+            <p>
+                Assalomu alaykum! Men Diana.
+                IT sohasiga qiziqaman va kelajakda
+                kuchli dasturchi bo‘lishni maqsad qilganman.
+            </p>
+
+            <a href="#about" class="btn">
+                Men haqimda
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MEN HAQIMDA
+    ========================== -->
+
+    <section class="about" id="about">
+
+        <h2 class="section-title">
+            Men <span>haqimda</span>
+        </h2>
+
+        <div class="about-container">
+
+            <div class="about-text">
+
+                <h3>
+                    Salom, men Diana! 👋
+                </h3>
+
+                <p>
+                    Men Ozodboyeva Diana Omadbekovna.
+                    Hozirda Urganch shahridagi IT texnikumida
+                    tahsil olyapman.
+                </p>
+
+                <p>
+                    IT sohasiga qiziqishim sababli dasturlash,
+                    dizayn, SMM va zamonaviy texnologiyalarni
+                    o‘rganishga katta e'tibor beryapman.
+                </p>
+
+                <p>
+                    Mening eng katta maqsadim —
+                    kelajakda juda yaxshi va professional
+                    dasturchi bo‘lish.
+                </p>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-item">
+                    <strong>👩 Ism:</strong>
+                    Diana Ozodboyeva
+                </div>
+
+                <div class="info-item">
+                    <strong>🎓 Ta'lim:</strong>
+                    IT texnikumi
+                </div>
+
+                <div class="info-item">
+                    <strong>📍 Hudud:</strong>
+                    Xorazm viloyati
+                </div>
+
+                <div class="info-item">
+                    <strong>💻 Yo‘nalish:</strong>
+                    Frontend Development
+                </div>
+
+                <div class="info-item">
+                    <strong>🎯 Maqsad:</strong>
+                    Professional dasturchi bo‘lish
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         TA'LIM
+    ========================== -->
+
+    <section class="education" id="education">
+
+        <h2 class="section-title">
+            Ta'lim va <span>kurslar</span>
+        </h2>
+
+        <div class="timeline">
+
+            <div class="timeline-item">
+
+                <h3>
+                    🏫 IT Texnikum
+                </h3>
+
+                <div class="date">
+                    Hozirgi ta'lim
+                </div>
+
+                <p>
+                    Hozirda Urganch shahridagi
+                    IT texnikumida tahsil olyapman.
+                    Bu yerda IT va dasturlash sohasidagi
+                    bilimlarimni rivojlantiryapman.
+                </p>
+
+            </div>
+
+
+            <div class="timeline-item">
+
+                <h3>
+                    💻 DATA Ta'lim Stansiyasi
+                </h3>
+
+                <div class="date">
+                    2 yil oldin
+                </div>
+
+                <p>
+                    DATA Ta'lim Stansiyasida SMM,
+                    video montaj, Brandface va
+                    ofis dasturlari bo‘yicha kurslarda
+                    tahsil olganman.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         KO'NIKMALAR
+    ========================== -->
+
+    <section class="skills" id="skills">
+
+        <h2 class="section-title">
+            Mening <span>ko‘nikmalarim</span>
+        </h2>
+
+        <div class="skills-container">
+
+            <div class="skill">
+
+                <div class="skill-title">
+                    <span>HTML</span>
+                    <span>85%</span>
+                </div>
+
+                <div class="skill-bar">
+                    <div class="skill-progress html"></div>
+                </div>
+
+            </div>
+
+
+            <div class="skill">
+
+                <div class="skill-title">
+                    <span>CSS</span>
+                    <span>80%</span>
+                </div>
+
+                <div class="skill-bar">
+                    <div class="skill-progress css"></div>
+                </div>
+
+            </div>
+
+
+            <div class="skill">
+
+                <div class="skill-title">
+                    <span>SMM</span>
+                    <span>75%</span>
+                </div>
+
+                <div class="skill-bar">
+                    <div class="skill-progress smm"></div>
+                </div>
+
+            </div>
+
+
+            <div class="skill">
+
+                <div class="skill-title">
+                    <span>Video montaj</span>
+                    <span>75%</span>
+                </div>
+
+                <div class="skill-bar">
+                    <div class="skill-progress video"></div>
+                </div>
+
+            </div>
+
+
+            <div class="skill">
+
+                <div class="skill-title">
+                    <span>Ofis dasturlari</span>
+                    <span>85%</span>
+                </div>
+
+                <div class="skill-bar">
+                    <div class="skill-progress office"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         ISH TAJRIBASI
+    ========================== -->
+
+    <section class="experience" id="experience">
+
+        <h2 class="section-title">
+            Ish <span>tajribam</span>
+        </h2>
+
+        <div class="experience-card">
+
+            <h3>
+                💼 DATA Ta'lim Stansiyasi
+            </h3>
+
+            <div class="time">
+                8 oy
+            </div>
+
+            <p>
+                DATA Ta'lim Stansiyasida 8 oy davomida
+                tashkilotning turli ish bo‘limlarida
+                faoliyat olib bordim.
+            </p>
+
+            <p style="margin-top: 15px;">
+                Bu tajriba menga jamoada ishlash,
+                mas'uliyat, turli vazifalarni bajarish
+                va ish jarayonini tushunishda katta
+                yordam berdi.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MAQSAD
+    ========================== -->
+
+    <section class="goal">
+
+        <h2>
+            Mening katta maqsadim 🚀
+        </h2>
+
+        <p>
+            Kelajakda juda yaxshi, bilimli va
+            professional dasturchi bo‘lishni xohlayman.
+            Har kuni yangi texnologiyalarni o‘rganib,
+            o‘z ustimda ishlab, katta loyihalar yaratishni
+            maqsad qilganman.
+        </p>
+
+        <a href="#contact" class="btn">
+            Men bilan bog‘lanish
+        </a>
+
+    </section>
+
+
+    <!-- =========================
+         ALOQA
+    ========================== -->
+
+    <section class="contact" id="contact">
+
+        <h2 class="section-title">
+            Men bilan <span>bog‘laning</span>
+        </h2>
+
+        <div class="contact-container">
+
+            <div class="contact-form">
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Ismingiz"
+                >
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Emailingiz"
+                >
+
+                <textarea
+                    id="message"
+                    placeholder="Xabaringiz..."
+                ></textarea>
+
+                <button
+                    class="btn"
+                    onclick="sendMessage()"
+                >
+                    Yuborish 📩
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <p>
+            © 2026 Diana Ozodboyeva
+        </p>
+
+        <p>
+            Bo‘lajak Frontend Developer 💻
+        </p>
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        function sendMessage() {
+
+            let name =
+                document.getElementById("name").value;
+
+            let email =
+                document.getElementById("email").value;
+
+            let message =
+                document.getElementById("message").value;
+
+
+            if (
+                name === "" ||
+                email === "" ||
+                message === ""
+            ) {
+
+                alert(
+                    "Iltimos, barcha maydonlarni to‘ldiring! ⚠️"
+                );
+
+                return;
+            }
+
+
+            alert(
+                "Rahmat, " +
+                name +
+                "! 😊\n\n" +
+                "Xabaringiz qabul qilindi."
+            );
+
+
+            document.getElementById("name").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("message").value = "";
+
+        }
+
+    </script>
+
+</body>
+
+</html>
