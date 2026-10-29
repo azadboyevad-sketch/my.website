@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EduWay — Frontend Development</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+
+        /* ========================================
+           COURSE PAGE
+        ======================================== */
+
+        .course-page {
+            background: #f8fafc;
+            min-height: 100vh;
+        }
+
+        .course-hero {
+            background:
+                linear-gradient(
+                    135deg,
+                    #1d4ed8,
+                    #7c3aed
+                );
+
+            color: white;
+
+            padding: 70px 0;
+        }
+
+        .course-hero-content {
+            display: grid;
+
+            grid-template-columns: 1.2fr .8fr;
+
+            gap: 60px;
+
+            align-items: center;
+        }
+
+        .course-label {
+            display: inline-block;
+
+            padding: 7px 12px;
+
+            background: rgba(255,255,255,.15);
+
+            border: 1px solid rgba(255,255,255,.2);
+
+            border-radius: 50px;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            margin-bottom: 18px;
+        }
+
+        .course-hero h1 {
+            font-size: clamp(38px, 5vw, 58px);
+
+            line-height: 1.08;
+
+            margin-bottom: 18px;
+
+            letter-spacing: -1.5px;
+        }
+
+        .course-hero p {
+            max-width: 650px;
+
+            color: #dbeafe;
+
+            font-size: 17px;
+
+            margin-bottom: 25px;
+        }
+
+        .course-info {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 20px;
+
+            color: #e0e7ff;
+
+            font-size: 14px;
+        }
+
+        .course-preview {
+            padding: 30px;
+
+            background: rgba(255,255,255,.12);
+
+            border: 1px solid rgba(255,255,255,.2);
+
+            border-radius: 22px;
+
+            backdrop-filter: blur(10px);
+        }
+
+        .preview-icon {
+            height: 180px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 15px;
+
+            background: rgba(255,255,255,.12);
+
+            font-size: 75px;
+
+            margin-bottom: 20px;
+        }
+
+        .preview-title {
+            font-size: 18px;
+
+            font-weight: 800;
+
+            margin-bottom: 5px;
+        }
+
+        .preview-text {
+            color: #dbeafe;
+
+            font-size: 13px;
+        }
+
+
+        /* CONTENT */
+
+        .course-content {
+            padding: 70px 0;
+        }
+
+        .course-layout {
+            display: grid;
+
+            grid-template-columns: 1.5fr .5fr;
+
+            gap: 30px;
+
+            align-items: start;
+        }
+
+
+        /* LESSONS */
+
+        .lessons-card {
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 18px;
+
+            overflow: hidden;
+        }
+
+        .lessons-header {
+            padding: 25px;
+
+            border-bottom: 1px solid var(--border);
+        }
+
+        .lessons-header h2 {
+            font-size: 25px;
+
+            margin-bottom: 5px;
+        }
+
+        .lessons-header p {
+            color: var(--muted);
+
+            font-size: 14px;
+        }
+
+        .lesson-item {
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 18px 22px;
+
+            border-bottom: 1px solid var(--border);
+
+            transition: .3s;
+        }
+
+        .lesson-item:last-child {
+            border-bottom: none;
+        }
+
+        .lesson-item:hover {
+            background: #f8fafc;
+        }
+
+        .lesson-icon {
+            width: 42px;
+            height: 42px;
+
+            flex-shrink: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #eff6ff;
+
+            color: var(--primary);
+
+            border-radius: 10px;
+        }
+
+        .lesson-info {
+            flex: 1;
+        }
+
+        .lesson-info h3 {
+            font-size: 15px;
+
+            margin-bottom: 3px;
+        }
+
+        .lesson-info span {
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+        .lesson-status {
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+        .lesson-item.active {
+            background: #eff6ff;
+        }
+
+        .lesson-item.active .lesson-status {
+            color: var(--primary);
+
+            font-weight: 700;
+        }
+
+
+        /* SIDEBAR */
+
+        .course-sidebar {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 20px;
+        }
+
+        .sidebar-card {
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 18px;
+
+            padding: 25px;
+        }
+
+        .sidebar-card h3 {
+            font-size: 19px;
+
+            margin-bottom: 18px;
+        }
+
+        .progress-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            font-size: 13px;
+
+            margin-bottom: 8px;
+        }
+
+        .progress-row span {
+            color: var(--muted);
+        }
+
+        .progress-row strong {
+            color: var(--primary);
+        }
+
+        .course-progress {
+            height: 9px;
+
+            background: #e2e8f0;
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            margin-bottom: 12px;
+        }
+
+        .course-progress div {
+            width: 25%;
+
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--primary),
+                    var(--secondary)
+                );
+
+            border-radius: 20px;
+        }
+
+        .sidebar-text {
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+        .mentor {
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+        }
+
+        .mentor-avatar {
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #dbeafe;
+
+            border-radius: 50%;
+
+            font-size: 23px;
+        }
+
+        .mentor strong {
+            display: block;
+
+            font-size: 14px;
+        }
+
+        .mentor span {
+            color: var(--muted);
+
+            font-size: 12px;
+        }
+
+
+        /* VIDEO */
+
+        .video-section {
+            margin-top: 30px;
+
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: 18px;
+
+            padding: 25px;
+        }
+
+        .video-box {
+            height: 350px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            flex-direction: column;
+
+            background: #0f172a;
+
+            border-radius: 14px;
+
+            color: white;
+
+            text-align: center;
+        }
+
+        .play-button {
+            width: 65px;
+            height: 65px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: var(--primary);
+
+            border-radius: 50%;
+
+            font-size: 25px;
+
+            margin-bottom: 15px;
+
+            cursor: pointer;
+
+            transition: .3s;
+        }
+
+        .play-button:hover {
+            transform: scale(1.08);
+
+            background: var(--primary-dark);
+        }
+
+        .video-box h3 {
+            font-size: 20px;
+        }
+
+        .video-box p {
+            color: #94a3b8;
+
+            font-size: 13px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 900px) {
+
+            .course-hero-content {
+                grid-template-columns: 1fr;
+            }
+
+            .course-layout {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .course-hero {
+                padding: 50px 0;
+            }
+
+            .course-info {
+                flex-direction: column;
+
+                gap: 7px;
+            }
+
+            .video-box {
+                height: 250px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="container nav-content">
+
+            <a href="index.html" class="logo">
+                Edu<span>Way</span>
+            </a>
+
+            <nav>
+
+                <a href="index.html">
+                    Bosh sahifa
+                </a>
+
+                <a href="courses.html">
+                    Kurslar
+                </a>
+
+                <a href="index.html#about">
+                    Biz haqimizda
+                </a>
+
+                <a href="index.html#contact">
+                    Aloqa
+                </a>
+
+            </nav>
+
+            <div class="nav-buttons">
+
+                <a href="login.html" class="login-btn">
+                    Kirish
+                </a>
+
+                <a href="register.html" class="register-btn">
+                    Ro‘yxatdan o‘tish
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main class="course-page">
+
+
+        <!-- COURSE HERO -->
+
+        <section class="course-hero">
+
+            <div class="container course-hero-content">
+
+
+                <div>
+
+                    <span class="course-label">
+                        DASTURLASH
+                    </span>
+
+                    <h1>
+                        Frontend Development
+                    </h1>
+
+                    <p>
+                        HTML, CSS va JavaScript yordamida
+                        zamonaviy va professional web
+                        saytlar yaratishni noldan o‘rganing.
+                    </p>
+
+
+                    <div class="course-info">
+
+                        <span>
+                            📚 18 ta dars
+                        </span>
+
+                        <span>
+                            ⏱ 6 soat
+                        </span>
+
+                        <span>
+                            ⭐ 4.9 reyting
+                        </span>
+
+                        <span>
+                            🎓 Boshlang‘ich daraja
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="course-preview">
+
+                    <div class="preview-icon">
+                        💻
+                    </div>
+
+                    <div class="preview-title">
+                        Kursni o‘rganishni boshlang
+                    </div>
+
+                    <div class="preview-text">
+                        18 ta amaliy dars sizni kutmoqda.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTENT -->
+
+        <section class="course-content">
+
+            <div class="container course-layout">
+
+
+                <!-- LEFT -->
+
+                <div>
+
+
+                    <!-- VIDEO -->
+
+                    <div class="video-section">
+
+                        <div class="video-box">
+
+                            <div
+                                class="play-button"
+                                onclick="playVideo()"
+                            >
+                                ▶
+                            </div>
+
+                            <h3>
+                                1-dars: HTML asoslari
+                            </h3>
+
+                            <p>
+                                Darsni boshlash uchun
+                                ▶ tugmasini bosing
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- LESSONS -->
+
+                    <div
+                        class="lessons-card"
+                        style="margin-top: 30px;"
+                    >
+
+                        <div class="lessons-header">
+
+                            <h2>
+                                Kurs dasturi
+                            </h2>
+
+                            <p>
+                                Barcha darslarni bosqichma-bosqich
+                                o‘rganing.
+                            </p>
+
+                        </div>
+
+
+                        <div
+                            class="lesson-item active"
+                            onclick="selectLesson(1, 'HTML asoslari')"
+                        >
+
+                            <div class="lesson-icon">
+                                ▶
+                            </div>
+
+                            <div class="lesson-info">
+
+                                <h3>
+                                    1. HTML asoslari
+                                </h3>
+
+                                <span>
+                                    20 daqiqa
+                                </span>
+
+                            </div>
+
+                            <div class="lesson-status">
+                                Boshlash
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="lesson-item"
+                            onclick="selectLesson(2, 'CSS asoslari')"
+                        >
+
+                            <div class="lesson-icon">
+                                🔒
+                            </div>
+
+                            <div class="lesson-info">
+
+                                <h3>
+                                    2. CSS asoslari
+                                </h3>
+
+                                <span>
+                                    30 daqiqa
+                                </span>
+
+                            </div>
+
+                            <div class="lesson-status">
+                                Qulflangan
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="lesson-item"
+                            onclick="selectLesson(3, 'Flexbox va Grid')"
+                        >
+
+                            <div class="lesson-icon">
+                                🔒
+                            </div>
+
+                            <div class="lesson-info">
+
+                                <h3>
+                                    3. Flexbox va Grid
+                                </h3>
+
+                                <span>
+                                    35 daqiqa
+                                </span>
+
+                            </div>
+
+                            <div class="lesson-status">
+                                Qulflangan
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="lesson-item"
+                            onclick="selectLesson(4, 'JavaScript asoslari')"
+                        >
+
+                            <div class="lesson-icon">
+                                🔒
+                            </div>
+
+                            <div class="lesson-info">
+
+                                <h3>
+                                    4. JavaScript asoslari
+                                </h3>
+
+                                <span>
+                                    45 daqiqa
+                                </span>
+
+                            </div>
+
+                            <div class="lesson-status">
+                                Qulflangan
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="lesson-item"
+                            onclick="selectLesson(5, 'DOM bilan ishlash')"
+                        >
+
+                            <div class="lesson-icon">
+                                🔒
+                            </div>
+
+                            <div class="lesson-info">
+
+                                <h3>
+                                    5. DOM bilan ishlash
+                                </h3>
+
+                                <span>
+                                    40 daqiqa
+                                </span>
+
+                            </div>
+
+                            <div class="lesson-status">
+                                Qulflangan
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="lesson-item"
+                            onclick="selectLesson(6, 'Amaliy loyiha')"
+                        >
+
+                            <div class="lesson-icon">
+                                🔒
+                            </div>
+
+                            <div class="lesson-info">
+
+                                <h3>
+                                    6. Amaliy loyiha
+                                </h3>
+
+                                <span>
+                                    60 daqiqa
+                                </span>
+
+                            </div>
+
+                            <div class="lesson-status">
+                                Qulflangan
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RIGHT SIDEBAR -->
+
+                <aside class="course-sidebar">
+
+
+                    <!-- PROGRESS -->
+
+                    <div class="sidebar-card">
+
+                        <h3>
+                            Kurs progressi
+                        </h3>
+
+                        <div class="progress-row">
+
+                            <span>
+                                Bajarildi
+                            </span>
+
+                            <strong>
+                                25%
+                            </strong>
+
+                        </div>
+
+                        <div class="course-progress">
+                            <div></div>
+                        </div>
+
+                        <p class="sidebar-text">
+                            6 ta darsdan 1 tasi bajarilgan.
+                        </p>
+
+                    </div>
+
+
+                    <!-- MENTOR -->
+
+                    <div class="sidebar-card">
+
+                        <h3>
+                            Mentoringiz
+                        </h3>
+
+                        <div class="mentor">
+
+                            <div class="mentor-avatar">
+                                👨‍🏫
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Azizbek Karimov
+                                </strong>
+
+                                <span>
+                                    Frontend Developer
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- COURSE INFO -->
+
+                    <div class="sidebar-card">
+
+                        <h3>
+                            Kurs haqida
+                        </h3>
+
+                        <p class="sidebar-text">
+
+                            Ushbu kursda siz zamonaviy
+                            web dasturlash asoslarini
+                            o‘rganasiz va yakunda
+                            o‘z loyihangizni yaratasiz.
+
+                        </p>
+
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="container footer-content">
+
+            <div>
+
+                <a href="index.html" class="logo">
+                    Edu<span>Way</span>
+                </a>
+
+                <p>
+                    Bilimni o‘rgan. Amalda qo‘lla.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="courses.html">
+                    Kurslar
+                </a>
+
+                <a href="index.html#about">
+                    Biz haqimizda
+                </a>
+
+                <a href="index.html#contact">
+                    Aloqa
+                </a>
+
+                <a href="login.html">
+                    Kirish
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 EduWay.
+            Barcha huquqlar himoyalangan.
+
+        </div>
+
+    </footer>
+
+
+    <script>
+
+        function playVideo() {
+
+            alert(
+                "Video dars keyingi bosqichda ulanadi."
+            );
+
+        }
+
+
+        function selectLesson(
+            number,
+            lessonName
+        ) {
+
+            if (number !== 1) {
+
+                alert(
+                    "Bu dars hozircha qulflangan. Avval oldingi darsni yakunlang."
+                );
+
+                return;
+
+            }
+
+            document.querySelector(
+                ".video-box h3"
+            ).textContent =
+                number +
+                "-dars: " +
+                lessonName;
+
+        }
+
+    </script>
+
+</body>
+
+</html>

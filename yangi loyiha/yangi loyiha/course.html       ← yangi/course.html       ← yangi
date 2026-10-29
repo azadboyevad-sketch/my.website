@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EduWay — Frontend Development</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* ========================================
+           COURSE DETAIL PAGE
+        ======================================== */
+
+        .course-hero {
+            padding: 75px 0;
+            background:
+                radial-gradient(
+                    circle at 10% 20%,
+                    rgba(37, 99, 235, 0.13),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #f8fafc,
+                    #eff6ff
+                );
+        }
+
+        .course-hero-content {
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .course-breadcrumb {
+            margin-bottom: 20px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .course-breadcrumb a {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .course-hero h1 {
+            max-width: 700px;
+            font-size: clamp(38px, 5vw, 58px);
+            line-height: 1.08;
+            letter-spacing: -1.5px;
+            margin-bottom: 20px;
+        }
+
+        .course-hero-description {
+            max-width: 650px;
+            color: var(--text);
+            font-size: 17px;
+            margin-bottom: 25px;
+        }
+
+        .course-info-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .course-info-row span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .course-info-row .rating {
+            color: #f59e0b;
+            font-weight: 700;
+        }
+
+        /* PURCHASE CARD */
+
+        .purchase-card {
+            background: white;
+            padding: 25px;
+            border-radius: 22px;
+            border: 1px solid var(--border);
+            box-shadow: 0 25px 60px rgba(15, 23, 42, 0.12);
+        }
+
+        .course-preview {
+            height: 190px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 22px;
+
+            border-radius: 15px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #dbeafe,
+                    #bfdbfe
+                );
+
+            font-size: 70px;
+        }
+
+        .price {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--dark);
+        }
+
+        .old-price {
+            margin-left: 8px;
+            color: #94a3b8;
+            text-decoration: line-through;
+            font-size: 15px;
+        }
+
+        .buy-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 100%;
+
+            margin-top: 20px;
+            padding: 15px;
+
+            background: var(--primary);
+            color: white;
+
+            border: none;
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            font-size: 16px;
+            font-weight: 700;
+
+            transition: 0.3s;
+        }
+
+        .buy-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .purchase-note {
+            margin-top: 15px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* COURSE CONTENT */
+
+        .course-content-section {
+            background: white;
+        }
+
+        .course-layout {
+            display: grid;
+            grid-template-columns: 1.5fr 0.5fr;
+            gap: 60px;
+        }
+
+        .content-title {
+            margin-bottom: 25px;
+            font-size: 30px;
+        }
+
+        .course-description {
+            color: var(--text);
+            font-size: 16px;
+            margin-bottom: 35px;
+        }
+
+        /* WHAT YOU LEARN */
+
+        .learn-box {
+            padding: 30px;
+            margin-bottom: 45px;
+
+            background: #f8fafc;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+        }
+
+        .learn-box h2 {
+            margin-bottom: 22px;
+            font-size: 25px;
+        }
+
+        .learn-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .learn-list div {
+            display: flex;
+            gap: 10px;
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .learn-list span {
+            color: #16a34a;
+            font-weight: 800;
+        }
+
+        /* LESSONS */
+
+        .lessons {
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+
+        .lessons-header {
+            padding: 22px 25px;
+            background: #f8fafc;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .lessons-header h2 {
+            font-size: 23px;
+        }
+
+        .lessons-header p {
+            color: var(--muted);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .lesson-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+
+            padding: 19px 25px;
+
+            border-bottom: 1px solid var(--border);
+
+            transition: 0.3s;
+        }
+
+        .lesson-item:last-child {
+            border-bottom: none;
+        }
+
+        .lesson-item:hover {
+            background: #f8fafc;
+        }
+
+        .lesson-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .lesson-number {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 9px;
+
+            background: #eff6ff;
+            color: var(--primary);
+
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .lesson-name {
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .lesson-time {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* SIDEBAR */
+
+        .course-sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .sidebar-card {
+            padding: 25px;
+
+            background: #f8fafc;
+
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+
+            margin-bottom: 20px;
+        }
+
+        .sidebar-card h3 {
+            margin-bottom: 18px;
+            font-size: 20px;
+        }
+
+        .course-feature {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+
+            margin-bottom: 16px;
+
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .course-feature:last-child {
+            margin-bottom: 0;
+        }
+
+        .course-feature-icon {
+            width: 38px;
+            height: 38px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: white;
+
+            border-radius: 9px;
+        }
+
+        /* INSTRUCTOR */
+
+        .instructor {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .instructor-avatar {
+            width: 55px;
+            height: 55px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            border-radius: 50%;
+
+            color: white;
+            font-size: 23px;
+        }
+
+        .instructor strong {
+            display: block;
+        }
+
+        .instructor span {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+
+            .course-hero-content,
+            .course-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .purchase-card {
+                max-width: 600px;
+            }
+
+            .course-sidebar {
+                position: static;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .course-hero {
+                padding: 55px 0;
+            }
+
+            .course-hero h1 {
+                font-size: 38px;
+            }
+
+            .learn-list {
+                grid-template-columns: 1fr;
+            }
+
+            .lesson-item {
+                padding: 16px;
+            }
+
+            .lesson-time {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="container nav-content">
+
+            <a href="index.html" class="logo">
+                Edu<span>Way</span>
+            </a>
+
+            <nav>
+                <a href="index.html">Bosh sahifa</a>
+                <a href="courses.html">Kurslar</a>
+                <a href="index.html#about">Biz haqimizda</a>
+                <a href="index.html#contact">Aloqa</a>
+            </nav>
+
+            <div class="nav-buttons">
+
+                <a href="login.html" class="login-btn">
+                    Kirish
+                </a>
+
+                <a href="register.html" class="register-btn">
+                    Ro‘yxatdan o‘tish
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- COURSE HERO -->
+
+    <section class="course-hero">
+
+        <div class="container course-hero-content">
+
+            <div>
+
+                <div class="course-breadcrumb">
+                    <a href="courses.html">
+                        Kurslar
+                    </a>
+                    &nbsp; / &nbsp;
+                    Frontend Development
+                </div>
+
+                <div class="course-category">
+                    DASTURLASH
+                </div>
+
+                <h1>
+                    Frontend Development
+                </h1>
+
+                <p class="course-hero-description">
+                    HTML, CSS va JavaScript yordamida
+                    zamonaviy, chiroyli va interaktiv
+                    web-saytlar yaratishni bosqichma-bosqich
+                    o‘rganing.
+                </p>
+
+                <div class="course-info-row">
+
+                    <span class="rating">
+                        ⭐ 4.9
+                    </span>
+
+                    <span>
+                        👨‍🎓 320+ o‘quvchi
+                    </span>
+
+                    <span>
+                        📚 32 dars
+                    </span>
+
+                    <span>
+                        ⏱ 18 soat
+                    </span>
+
+                    <span>
+                        🟢 Boshlang‘ich
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- PURCHASE -->
+
+            <div class="purchase-card">
+
+                <div class="course-preview">
+                    💻
+                </div>
+
+                <div>
+
+                    <span class="price">
+                        149 000 so‘m
+                    </span>
+
+                    <span class="old-price">
+                        199 000 so‘m
+                    </span>
+
+                </div>
+
+                <button
+                    class="buy-btn"
+                    onclick="startCourse()"
+                >
+                    Kursni boshlash →
+                </button>
+
+                <p class="purchase-note">
+                    Bir marta xarid qiling va
+                    kursdan foydalaning.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTENT -->
+
+    <section class="course-content-section">
+
+        <div class="container course-layout">
+
+            <main>
+
+                <h2 class="content-title">
+                    Kurs haqida
+                </h2>
+
+                <p class="course-description">
+                    Ushbu kurs orqali web-dasturlashning
+                    eng muhim texnologiyalarini noldan
+                    boshlab o‘rganasiz. Darslar nazariya
+                    bilan cheklanib qolmaydi — har bir
+                    mavzu amaliy topshiriqlar orqali
+                    mustahkamlanadi.
+                </p>
+
+
+                <!-- WHAT YOU LEARN -->
+
+                <div class="learn-box">
+
+                    <h2>
+                        Kursda nimalarni o‘rganasiz?
+                    </h2>
+
+                    <div class="learn-list">
+
+                        <div>
+                            <span>✓</span>
+                            HTML5 va semantik HTML
+                        </div>
+
+                        <div>
+                            <span>✓</span>
+                            CSS3 va zamonaviy dizayn
+                        </div>
+
+                        <div>
+                            <span>✓</span>
+                            Flexbox va Grid
+                        </div>
+
+                        <div>
+                            <span>✓</span>
+                            Responsive Web Design
+                        </div>
+
+                        <div>
+                            <span>✓</span>
+                            JavaScript asoslari
+                        </div>
+
+                        <div>
+                            <span>✓</span>
+                            DOM bilan ishlash
+                        </div>
+
+                        <div>
+                            <span>✓</span>
+                            Interaktiv saytlar yaratish
+                        </div>
+
+                        <div>
+                            <span>✓</span>
+                            Real portfolio loyihasi
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LESSONS -->
+
+                <div class="lessons">
+
+                    <div class="lessons-header">
+
+                        <h2>
+                            Kurs dasturi
+                        </h2>
+
+                        <p>
+                            32 ta dars · 18 soatlik material
+                        </p>
+
+                    </div>
+
+
+                    <div class="lesson-item">
+
+                        <div class="lesson-left">
+
+                            <div class="lesson-number">
+                                01
+                            </div>
+
+                            <div>
+                                <div class="lesson-name">
+                                    HTML asoslariga kirish
+                                </div>
+
+                                <div class="lesson-time">
+                                    Video dars
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <span class="lesson-time">
+                            25:40
+                        </span>
+
+                    </div>
+
+
+                    <div class="lesson-item">
+
+                        <div class="lesson-left">
+
+                            <div class="lesson-number">
+                                02
+                            </div>
+
+                            <div>
+                                <div class="lesson-name">
+                                    HTML teglar va struktura
+                                </div>
+
+                                <div class="lesson-time">
+                                    Video dars
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <span class="lesson-time">
+                            32:15
+                        </span>
+
+                    </div>
+
+
+                    <div class="lesson-item">
+
+                        <div class="lesson-left">
+
+                            <div class="lesson-number">
+                                03
+                            </div>
+
+                            <div>
+                                <div class="lesson-name">
+                                    CSS asoslari
+                                </div>
+
+                                <div class="lesson-time">
+                                    Video dars
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <span class="lesson-time">
+                            38:20
+                        </span>
+
+                    </div>
+
+
+                    <div class="lesson-item">
+
+                        <div class="lesson-left">
+
+                            <div class="lesson-number">
+                                04
+                            </div>
+
+                            <div>
+                                <div class="lesson-name">
+                                    Ranglar va shriftlar
+                                </div>
+
+                                <div class="lesson-time">
+                                    Video dars
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <span class="lesson-time">
+                            28:45
+                        </span>
+
+                    </div>
+
+
+                    <div class="lesson-item">
+
+                        <div class="lesson-left">
+
+                            <div class="lesson-number">
+                                05
+                            </div>
+
+                            <div>
+                                <div class="lesson-name">
+                                    Flexbox bilan ishlash
+                                </div>
+
+                                <div class="lesson-time">
+                                    Video dars
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <span class="lesson-time">
+                            41:10
+                        </span>
+
+                    </div>
+
+
+                    <div class="lesson-item">
+
+                        <div class="lesson-left">
+
+                            <div class="lesson-number">
+                                06
+                            </div>
+
+                            <div>
+                                <div class="lesson-name">
+                                    CSS Grid
+                                </div>
+
+                                <div class="lesson-time">
+                                    Amaliy dars
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <span class="lesson-time">
+                            45:25
+                        </span>
+
+                    </div>
+
+
+                    <div class="lesson-item">
+
+                        <div class="lesson-left">
+
+                            <div class="lesson-number">
+                                07
+                            </div>
+
+                            <div>
+                                <div class="lesson-name">
+                                    Responsive dizayn
+                                </div>
+
+                                <div class="lesson-time">
+                                    Amaliy dars
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <span class="lesson-time">
+                            36:50
+                        </span>
+
+                    </div>
+
+
+                    <div class="lesson-item">
+
+                        <div class="lesson-left">
+
+                            <div class="lesson-number">
+                                08
+                            </div>
+
+                            <div>
+                                <div class="lesson-name">
+                                    JavaScriptga kirish
+                                </div>
+
+                                <div class="lesson-time">
+                                    Video dars
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <span class="lesson-time">
+                            39:15
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </main>
+
+
+            <!-- SIDEBAR -->
+
+            <aside class="course-sidebar">
+
+                <div class="sidebar-card">
+
+                    <h3>
+                        Kurs xususiyatlari
+                    </h3>
+
+                    <div class="course-feature">
+
+                        <div class="course-feature-icon">
+                            📚
+                        </div>
+
+                        32 ta dars
+
+                    </div>
+
+                    <div class="course-feature">
+
+                        <div class="course-feature-icon">
+                            ⏱
+                        </div>
+
+                        18 soatlik material
+
+                    </div>
+
+                    <div class="course-feature">
+
+                        <div class="course-feature-icon">
+                            🎯
+                        </div>
+
+                        Amaliy topshiriqlar
+
+                    </div>
+
+                    <div class="course-feature">
+
+                        <div class="course-feature-icon">
+                            🏆
+                        </div>
+
+                        Sertifikat
+
+                    </div>
+
+                    <div class="course-feature">
+
+                        <div class="course-feature-icon">
+                            💼
+                        </div>
+
+                        Portfolio loyiha
+
+                    </div>
+
+                </div>
+
+
+                <!-- INSTRUCTOR -->
+
+                <div class="sidebar-card">
+
+                    <h3>
+                        Kurs mentori
+                    </h3>
+
+                    <div class="instructor">
+
+                        <div class="instructor-avatar">
+                            👨‍💻
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Azizbek Karimov
+                            </strong>
+
+                            <span>
+                                Frontend Developer
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </section>
+
+
+    <!-- CTA -->
+
+    <section class="cta">
+
+        <div class="container">
+
+            <div class="cta-box">
+
+                <div>
+
+                    <span>
+                        EDUWAY BILAN O‘RGANING
+                    </span>
+
+                    <h2>
+                        Birinchi loyihangizni
+                        bugun yarating.
+                    </h2>
+
+                    <p>
+                        Bilimni o‘rganing va uni
+                        amalda qo‘llang.
+                    </p>
+
+                </div>
+
+                <a
+                    href="register.html"
+                    class="white-btn"
+                >
+                    Ro‘yxatdan o‘tish →
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="container footer-content">
+
+            <div>
+
+                <a href="index.html" class="logo">
+                    Edu<span>Way</span>
+                </a>
+
+                <p>
+                    Bilimni o‘rgan. Amalda qo‘lla.
+                </p>
+
+            </div>
+
+            <div class="footer-links">
+
+                <a href="courses.html">
+                    Kurslar
+                </a>
+
+                <a href="index.html#about">
+                    Biz haqimizda
+                </a>
+
+                <a href="index.html#contact">
+                    Aloqa
+                </a>
+
+                <a href="login.html">
+                    Kirish
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="copyright">
+
+            © 2026 EduWay.
+            Barcha huquqlar himoyalangan.
+
+        </div>
+
+    </footer>
+
+
+    <script>
+
+        function startCourse() {
+
+            const confirmed =
+                confirm(
+                    "Kursni boshlash uchun avval ro‘yxatdan o‘tishingiz kerak. Ro‘yxatdan o‘tish sahifasiga o‘tamizmi?"
+                );
+
+            if (confirmed) {
+                window.location.href =
+                    "register.html";
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>

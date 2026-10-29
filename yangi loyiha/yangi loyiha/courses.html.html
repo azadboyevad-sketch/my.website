@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>EduWay — Kurslar</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <style>
+
+        /* ========================================
+           COURSES PAGE
+        ======================================== */
+
+        .courses-page {
+            background: #f8fafc;
+            min-height: 100vh;
+        }
+
+
+        /* HERO */
+
+        .courses-hero {
+            padding: 75px 0 65px;
+            text-align: center;
+
+            background:
+                radial-gradient(
+                    circle at 15% 30%,
+                    rgba(37, 99, 235, .12),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 60%,
+                    rgba(124, 58, 237, .10),
+                    transparent 30%
+                ),
+                white;
+        }
+
+        .courses-hero h1 {
+            font-size: clamp(38px, 5vw, 58px);
+            line-height: 1.1;
+            margin: 12px auto 15px;
+            letter-spacing: -1.5px;
+        }
+
+        .courses-hero h1 span {
+            color: var(--primary);
+        }
+
+        .courses-hero p {
+            max-width: 650px;
+            margin: auto;
+            color: var(--muted);
+            font-size: 17px;
+        }
+
+
+        /* SEARCH */
+
+        .course-search {
+            max-width: 650px;
+            margin: 30px auto 0;
+            position: relative;
+        }
+
+        .course-search input {
+            width: 100%;
+            padding: 16px 55px 16px 20px;
+
+            border: 1px solid var(--border);
+            border-radius: 12px;
+
+            outline: none;
+
+            background: white;
+            color: var(--dark);
+
+            font-size: 15px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(15, 23, 42, .06);
+
+            transition: .3s;
+        }
+
+        .course-search input:focus {
+            border-color: var(--primary);
+
+            box-shadow:
+                0 0 0 4px
+                rgba(37, 99, 235, .08);
+        }
+
+        .search-icon {
+            position: absolute;
+
+            right: 20px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            font-size: 20px;
+        }
+
+
+        /* CONTENT */
+
+        .courses-content {
+            padding: 70px 0 100px;
+        }
+
+
+        /* FILTER */
+
+        .course-filter {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            margin-bottom: 35px;
+        }
+
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+        }
+
+        .category-btn {
+            border: 1px solid var(--border);
+
+            background: white;
+
+            color: var(--muted);
+
+            padding: 10px 17px;
+
+            border-radius: 50px;
+
+            cursor: pointer;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            transition: .3s;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .course-count {
+            color: var(--muted);
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+
+        /* GRID */
+
+        .all-course-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 25px;
+        }
+
+
+        /* CARD */
+
+        .all-course-card {
+            background: white;
+
+            border: 1px solid var(--border);
+
+            border-radius: var(--radius);
+
+            overflow: hidden;
+
+            transition: .35s;
+        }
+
+        .all-course-card:hover {
+            transform: translateY(-7px);
+
+            box-shadow:
+                0 18px 45px
+                rgba(15, 23, 42, .10);
+        }
+
+
+        .all-course-image {
+            height: 205px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+
+            font-size: 65px;
+        }
+
+        .all-course-image.frontend {
+            background:
+                linear-gradient(
+                    135deg,
+                    #dbeafe,
+                    #bfdbfe
+                );
+        }
+
+        .all-course-image.design {
+            background:
+                linear-gradient(
+                    135deg,
+                    #ede9fe,
+                    #ddd6fe
+                );
+        }
+
+        .all-course-image.marketing {
+            background:
+                linear-gradient(
+                    135deg,
+                    #dcfce7,
+                    #bbf7d0
+                );
+        }
+
+        .all-course-image.python {
+            background:
+                linear-gradient(
+                    135deg,
+                    #fef3c7,
+                    #fde68a
+                );
+        }
+
+        .all-course-image.mobile {
+            background:
+                linear-gradient(
+                    135deg,
+                    #cffafe,
+                    #a5f3fc
+                );
+        }
+
+        .all-course-image.data {
+            background:
+                linear-gradient(
+                    135deg,
+                    #fae8ff,
+                    #f5d0fe
+                );
+        }
+
+
+        .course-level {
+            position: absolute;
+
+            top: 15px;
+            left: 15px;
+
+            padding: 6px 10px;
+
+            background: rgba(255,255,255,.88);
+
+            border-radius: 7px;
+
+            color: var(--dark);
+
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+
+        .all-course-body {
+            padding: 23px;
+        }
+
+        .all-course-category {
+            color: var(--primary);
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            margin-bottom: 7px;
+        }
+
+        .all-course-body h3 {
+            font-size: 20px;
+
+            margin-bottom: 8px;
+        }
+
+        .all-course-body p {
+            color: var(--muted);
+
+            font-size: 13px;
+
+            min-height: 42px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .course-meta {
+            display: flex;
+
+            gap: 15px;
+
+            color: var(--muted);
+
+            font-size: 12px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .course-bottom {
+            padding-top: 17px;
+
+            border-top: 1px solid var(--border);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+        }
+
+        .course-price {
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--dark);
+        }
+
+        .course-rating {
+            color: #f59e0b;
+            font-size: 12px;
+        }
+
+
+        .start-course {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 10px 14px;
+
+            background: var(--primary);
+            color: white;
+
+            border-radius: 8px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            transition: .3s;
+        }
+
+        .start-course:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+
+        /* NO RESULT */
+
+        .no-results {
+            display: none;
+
+            padding: 60px 20px;
+
+            text-align: center;
+
+            color: var(--muted);
+        }
+
+        .no-results div {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+
+        .no-results h3 {
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+
+        /* CTA */
+
+        .courses-cta {
+            margin-top: 60px;
+
+            padding: 45px;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1d4ed8,
+                    #7c3aed
+                );
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 25px;
+        }
+
+        .courses-cta h2 {
+            font-size: 29px;
+            margin-bottom: 7px;
+        }
+
+        .courses-cta p {
+            color: #dbeafe;
+            font-size: 14px;
+        }
+
+        .courses-cta .white-btn {
+            white-space: nowrap;
+        }
+
+
+        /* TABLET */
+
+        @media (max-width: 950px) {
+
+            .all-course-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 650px) {
+
+            .courses-hero {
+                padding: 55px 0 45px;
+            }
+
+            .courses-hero h1 {
+                font-size: 38px;
+            }
+
+            .courses-hero p {
+                font-size: 15px;
+            }
+
+            .courses-content {
+                padding: 50px 0 70px;
+            }
+
+            .course-filter {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .all-course-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .courses-cta {
+                padding: 30px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .courses-cta h2 {
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <div class="container nav-content">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+                Edu<span>Way</span>
+            </a>
+
+
+            <nav>
+
+                <a href="index.html">
+                    Bosh sahifa
+                </a>
+
+                <a
+                    href="courses.html"
+                    style="color: var(--primary);"
+                >
+                    Kurslar
+                </a>
+
+                <a href="index.html#about">
+                    Biz haqimizda
+                </a>
+
+                <a href="index.html#contact">
+                    Aloqa
+                </a>
+
+            </nav>
+
+
+            <div class="nav-buttons">
+
+                <a
+                    href="login.html"
+                    class="login-btn"
+                >
+                    Kirish
+                </a>
+
+                <a
+                    href="register.html"
+                    class="register-btn"
+                >
+                    Ro‘yxatdan o‘tish
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main class="courses-page">
+
+
+        <!-- HERO -->
+
+        <section class="courses-hero">
+
+            <div class="container">
+
+                <span
+                    style="
+                        color: var(--primary);
+                        font-size: 13px;
+                        font-weight: 800;
+                        letter-spacing: 1.5px;
+                    "
+                >
+                    EDUWAY KURSLARI
+                </span>
+
+
+                <h1>
+                    O‘zingizga mos
+                    <span>kursni toping.</span>
+                </h1>
+
+
+                <p>
+                    Zamonaviy kasblarni o‘rganing,
+                    amaliy ko‘nikmalarni rivojlantiring
+                    va kelajagingizni yarating.
+                </p>
+
+
+                <!-- SEARCH -->
+
+                <div class="course-search">
+
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Kurs nomini qidiring..."
+                    >
+
+                    <span class="search-icon">
+                        🔍
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- COURSES -->
+
+        <section class="courses-content">
+
+            <div class="container">
+
+
+                <!-- FILTER -->
+
+                <div class="course-filter">
+
+                    <div class="categories">
+
+                        <button
+                            class="category-btn active"
+                            data-category="all"
+                        >
+                            Barchasi
+                        </button>
+
+                        <button
+                            class="category-btn"
+                            data-category="dasturlash"
+                        >
+                            Dasturlash
+                        </button>
+
+                        <button
+                            class="category-btn"
+                            data-category="dizayn"
+                        >
+                            Dizayn
+                        </button>
+
+                        <button
+                            class="category-btn"
+                            data-category="marketing"
+                        >
+                            Marketing
+                        </button>
+
+                        <button
+                            class="category-btn"
+                            data-category="data"
+                        >
+                            Data
+                        </button>
+
+                    </div>
+
+
+                    <span
+                        class="course-count"
+                        id="courseCount"
+                    >
+                        6 ta kurs
+                    </span>
+
+                </div>
+
+
+                <!-- COURSE GRID -->
+
+                <div
+                    class="all-course-grid"
+                    id="courseGrid"
+                >
+
+
+                    <!-- 1 -->
+
+                    <article
+                        class="all-course-card"
+                        data-category="dasturlash"
+                        data-name="Frontend Development"
+                    >
+
+                        <div
+                            class="all-course-image frontend"
+                        >
+
+                            <span class="course-level">
+                                BOSHLANG‘ICH
+                            </span>
+
+                            💻
+
+                        </div>
+
+
+                        <div class="all-course-body">
+
+                            <div class="all-course-category">
+                                DASTURLASH
+                            </div>
+
+                            <h3>
+                                Frontend Development
+                            </h3>
+
+                            <p>
+                                HTML, CSS va JavaScript
+                                yordamida zamonaviy saytlar
+                                yaratishni o‘rganing.
+                            </p>
+
+                            <div class="course-meta">
+                                <span>📚 18 dars</span>
+                                <span>⏱ 6 soat</span>
+                            </div>
+
+                            <div class="course-bottom">
+
+                                <div>
+
+                                    <div class="course-price">
+                                        149 000 so‘m
+                                    </div>
+
+                                    <div class="course-rating">
+                                        ⭐ 4.9
+                                    </div>
+
+                                </div>
+
+                                <a
+                                    href="#"
+                                    class="start-course"
+                                    onclick="startCourse(event, 'Frontend Development')"
+                                >
+                                    Boshlash →
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 2 -->
+
+                    <article
+                        class="all-course-card"
+                        data-category="dizayn"
+                        data-name="Grafik dizayn"
+                    >
+
+                        <div
+                            class="all-course-image design"
+                        >
+
+                            <span class="course-level">
+                                BOSHLANG‘ICH
+                            </span>
+
+                            🎨
+
+                        </div>
+
+
+                        <div class="all-course-body">
+
+                            <div class="all-course-category">
+                                DIZAYN
+                            </div>
+
+                            <h3>
+                                Grafik dizayn
+                            </h3>
+
+                            <p>
+                                Kreativ dizayn, ranglar,
+                                kompozitsiya va kontent
+                                yaratishni o‘rganing.
+                            </p>
+
+                            <div class="course-meta">
+                                <span>📚 15 dars</span>
+                                <span>⏱ 5 soat</span>
+                            </div>
+
+                            <div class="course-bottom">
+
+                                <div>
+
+                                    <div class="course-price">
+                                        129 000 so‘m
+                                    </div>
+
+                                    <div class="course-rating">
+                                        ⭐ 4.8
+                                    </div>
+
+                                </div>
+
+                                <a
+                                    href="#"
+                                    class="start-course"
+                                    onclick="startCourse(event, 'Grafik dizayn')"
+                                >
+                                    Boshlash →
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 3 -->
+
+                    <article
+                        class="all-course-card"
+                        data-category="marketing"
+                        data-name="SMM Pro"
+                    >
+
+                        <div
+                            class="all-course-image marketing"
+                        >
+
+                            <span class="course-level">
+                                O‘RTA
+                            </span>
+
+                            📱
+
+                        </div>
+
+
+                        <div class="all-course-body">
+
+                            <div class="all-course-category">
+                                MARKETING
+                            </div>
+
+                            <h3>
+                                SMM Pro
+                            </h3>
+
+                            <p>
+                                Instagram, Telegram va boshqa
+                                tarmoqlarda brend rivojlantirish.
+                            </p>
+
+                            <div class="course-meta">
+                                <span>📚 20 dars</span>
+                                <span>⏱ 7 soat</span>
+                            </div>
+
+                            <div class="course-bottom">
+
+                                <div>
+
+                                    <div class="course-price">
+                                        119 000 so‘m
+                                    </div>
+
+                                    <div class="course-rating">
+                                        ⭐ 4.9
+                                    </div>
+
+                                </div>
+
+                                <a
+                                    href="#"
+                                    class="start-course"
+                                    onclick="startCourse(event, 'SMM Pro')"
+                                >
+                                    Boshlash →
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 4 -->
+
+                    <article
+                        class="all-course-card"
+                        data-category="dasturlash"
+                        data-name="Python dasturlash"
+                    >
+
+                        <div
+                            class="all-course-image python"
+                        >
+
+                            <span class="course-level">
+                                BOSHLANG‘ICH
+                            </span>
+
+                            🐍
+
+                        </div>
+
+
+                        <div class="all-course-body">
+
+                            <div class="all-course-category">
+                                DASTURLASH
+                            </div>
+
+                            <h3>
+                                Python dasturlash
+                            </h3>
+
+                            <p>
+                                Python asoslari va dasturlash
+                                mantiqini noldan o‘rganing.
+                            </p>
+
+                            <div class="course-meta">
+                                <span>📚 22 dars</span>
+                                <span>⏱ 8 soat</span>
+                            </div>
+
+                            <div class="course-bottom">
+
+                                <div>
+
+                                    <div class="course-price">
+                                        159 000 so‘m
+                                    </div>
+
+                                    <div class="course-rating">
+                                        ⭐ 4.9
+                                    </div>
+
+                                </div>
+
+                                <a
+                                    href="#"
+                                    class="start-course"
+                                    onclick="startCourse(event, 'Python dasturlash')"
+                                >
+                                    Boshlash →
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 5 -->
+
+                    <article
+                        class="all-course-card"
+                        data-category="dasturlash"
+                        data-name="Mobil ilova yaratish"
+                    >
+
+                        <div
+                            class="all-course-image mobile"
+                        >
+
+                            <span class="course-level">
+                                O‘RTA
+                            </span>
+
+                            📱
+
+                        </div>
+
+
+                        <div class="all-course-body">
+
+                            <div class="all-course-category">
+                                DASTURLASH
+                            </div>
+
+                            <h3>
+                                Mobil ilova yaratish
+                            </h3>
+
+                            <p>
+                                Zamonaviy mobil ilovalar yaratish
+                                asoslarini o‘rganing.
+                            </p>
+
+                            <div class="course-meta">
+                                <span>📚 24 dars</span>
+                                <span>⏱ 9 soat</span>
+                            </div>
+
+                            <div class="course-bottom">
+
+                                <div>
+
+                                    <div class="course-price">
+                                        179 000 so‘m
+                                    </div>
+
+                                    <div class="course-rating">
+                                        ⭐ 4.8
+                                    </div>
+
+                                </div>
+
+                                <a
+                                    href="#"
+                                    class="start-course"
+                                    onclick="startCourse(event, 'Mobil ilova yaratish')"
+                                >
+                                    Boshlash →
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- 6 -->
+
+                    <article
+                        class="all-course-card"
+                        data-category="data"
+                        data-name="Data Analytics"
+                    >
+
+                        <div
+                            class="all-course-image data"
+                        >
+
+                            <span class="course-level">
+                                O‘RTA
+                            </span>
+
+                            📊
+
+                        </div>
+
+
+                        <div class="all-course-body">
+
+                            <div class="all-course-category">
+                                DATA
+                            </div>
+
+                            <h3>
+                                Data Analytics
+                            </h3>
+
+                            <p>
+                                Ma’lumotlarni tahlil qilish,
+                                grafiklar va hisobotlar yaratish.
+                            </p>
+
+                            <div class="course-meta">
+                                <span>📚 19 dars</span>
+                                <span>⏱ 7 soat</span>
+                            </div>
+
+                            <div class="course-bottom">
+
+                                <div>
+
+                                    <div class="course-price">
+                                        169 000 so‘m
+                                    </div>
+
+                                    <div class="course-rating">
+                                        ⭐ 4.9
+                                    </div>
+
+                                </div>
+
+                                <a
+                                    href="#"
+                                    class="start-course"
+                                    onclick="startCourse(event, 'Data Analytics')"
+                                >
+                                    Boshlash →
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <!-- NO RESULT -->
+
+                <div
+                    class="no-results"
+                    id="noResults"
+                >
+
+                    <div>
+                        🔍
+                    </div>
+
+                    <h3>
+                        Kurs topilmadi
+                    </h3>
+
+                    <p>
+                        Boshqa nom yoki kategoriyani
+                        qidirib ko‘ring.
+                    </p>
+
+                </div>
+
+
+                <!-- CTA -->
+
+                <div class="courses-cta">
+
+                    <div>
+
+                        <h2>
+                            Qaysi kursni tanlashni
+                            bilmayapsizmi?
+                        </h2>
+
+                        <p>
+                            Biz bilan bog‘laning,
+                            sizga mos yo‘nalishni
+                            tanlashda yordam beramiz.
+                        </p>
+
+                    </div>
+
+
+                    <a
+                        href="index.html#contact"
+                        class="white-btn"
+                    >
+                        Biz bilan bog‘lanish →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="container footer-content">
+
+            <div>
+
+                <a
+                    href="index.html"
+                    class="logo"
+                >
+                    Edu<span>Way</span>
+                </a>
+
+                <p>
+                    Bilimni o‘rgan. Amalda qo‘lla.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="courses.html">
+                    Kurslar
+                </a>
+
+                <a href="index.html#about">
+                    Biz haqimizda
+                </a>
+
+                <a href="index.html#contact">
+                    Aloqa
+                </a>
+
+                <a href="login.html">
+                    Kirish
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="copyright">
+
+            © 2026 EduWay.
+            Barcha huquqlar himoyalangan.
+
+        </div>
+
+    </footer>
+
+
+    <script>
+
+        /* ========================================
+           CATEGORY FILTER
+        ======================================== */
+
+        const categoryButtons =
+            document.querySelectorAll(
+                ".category-btn"
+            );
+
+        const courseCards =
+            document.querySelectorAll(
+                ".all-course-card"
+            );
+
+        const searchInput =
+            document.getElementById(
+                "searchInput"
+            );
+
+        const courseCount =
+            document.getElementById(
+                "courseCount"
+            );
+
+        const noResults =
+            document.getElementById(
+                "noResults"
+            );
+
+
+        let selectedCategory = "all";
+
+
+        categoryButtons.forEach(
+            function(button) {
+
+                button.addEventListener(
+                    "click",
+                    function() {
+
+                        categoryButtons.forEach(
+                            function(btn) {
+
+                                btn.classList.remove(
+                                    "active"
+                                );
+
+                            }
+                        );
+
+
+                        button.classList.add(
+                            "active"
+                        );
+
+
+                        selectedCategory =
+                            button.dataset.category;
+
+
+                        filterCourses();
+
+                    }
+                );
+
+            }
+        );
+
+
+        /* ========================================
+           SEARCH
+        ======================================== */
+
+        searchInput.addEventListener(
+            "input",
+            function() {
+
+                filterCourses();
+
+            }
+        );
+
+
+        /* ========================================
+           FILTER FUNCTION
+        ======================================== */
+
+        function filterCourses() {
+
+            const searchText =
+                searchInput.value
+                    .toLowerCase()
+                    .trim();
+
+
+            let visibleCount = 0;
+
+
+            courseCards.forEach(
+                function(card) {
+
+                    const category =
+                        card.dataset.category;
+
+                    const name =
+                        card.dataset.name
+                            .toLowerCase();
+
+
+                    const categoryMatch =
+                        selectedCategory === "all" ||
+                        category === selectedCategory;
+
+
+                    const searchMatch =
+                        name.includes(
+                            searchText
+                        );
+
+
+                    if (
+                        categoryMatch &&
+                        searchMatch
+                    ) {
+
+                        card.style.display =
+                            "block";
+
+                        visibleCount++;
+
+                    } else {
+
+                        card.style.display =
+                            "none";
+
+                    }
+
+                }
+            );
+
+
+            courseCount.textContent =
+                visibleCount + " ta kurs";
+
+
+            if (visibleCount === 0) {
+
+                noResults.style.display =
+                    "block";
+
+            } else {
+
+                noResults.style.display =
+                    "none";
+
+            }
+
+        }
+
+
+        /* ========================================
+           START COURSE
+        ======================================== */
+
+        function startCourse(
+            event,
+            courseName
+        ) {
+
+            event.preventDefault();
+
+
+            const loggedIn =
+                localStorage.getItem(
+                    "eduwayLoggedIn"
+                );
+
+
+            if (loggedIn !== "true") {
+
+                const goLogin =
+                    confirm(
+                        "Kursni boshlash uchun avval tizimga kirishingiz kerak. Kirish sahifasiga o‘tasizmi?"
+                    );
+
+
+                if (goLogin) {
+
+                    window.location.href =
+                        "login.html";
+
+                }
+
+                return;
+
+            }
+
+
+            /*
+                Keyingi bosqichda bu joy
+                haqiqiy kurs sahifasiga
+                olib boriladi.
+            */
+
+            alert(
+                '"' +
+                courseName +
+                '" kursi tanlandi! Kurs sahifasi keyingi bosqichda ochiladi.'
+            );
+
+        }
+
+    </script>
+
+</body>
+
+</html>
